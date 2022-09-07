@@ -1,0 +1,95 @@
+//HEAD
+
+#include "stdio.h"
+#include "string.h"
+#include "stdlib.h"
+#include "math.h"
+
+//BODY
+
+int stackArr[100005];
+int top = -1;  // Stores the index of the topmost element on the stack
+void push(int x) // Insert an element onto the top of the stack
+{
+    stackArr[++top]=x;
+}
+
+void pop()  // Removes an element from the top of the stack
+{
+    top--;
+}
+
+void min()
+{
+    int mi=stackArr[0];
+    for(int i=1; i<=top; i++)
+    {
+        if(stackArr[i]<mi)
+            mi=stackArr[i];
+    }
+    printf("%d\n",mi);
+}
+
+void max()
+{
+    int ma=stackArr[0];
+    for(int i=1; i<=top; i++)
+    {
+        if(stackArr[i]>ma)
+            ma=stackArr[i];
+    }
+    printf("%d\n",ma);
+}
+
+int empty()//Returns 1 if the stack is empty and 0 otherwise
+{
+    if(top==-1)
+        return 1;
+    else
+        return 0;
+}
+
+//TAIL
+
+int main()
+{
+    int n;
+    top = -1;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        int x;
+        char s[100];
+        scanf("%s", s);
+        if (strcmp(s,"Add")==0) {
+            scanf("%d", &x);
+            push(x);
+        }
+        else if (strcmp(s,"Remove")==0) {
+            if (empty()) {
+                printf("Invalid\n");
+                continue;
+            }
+            else {
+                pop();
+            }
+        }
+        else if (strcmp(s,"CallMin")==0){
+            if (empty()) {
+                printf("Invalid\n");
+                continue;
+            }
+            else
+                min();
+            
+        }
+        else if(strcmp(s,"CallMax")==0){
+            if (empty()) {
+                printf("Invalid\n");
+                continue;
+            }
+            else
+                max();
+        }
+    }
+    return 0;
+}
